@@ -14,10 +14,40 @@ class ArrayList
   # Define a method "<<" which takes a single argument. This method should
   # append the argument to the end of this ArrayList and increase the size by
   # 1. The return value must be self.
+  def << value
+    fixed_array_size = @array.size
+
+    if fixed_array_size == @size
+      temp_array = FixedArray.new(fixed_array_size * 2)
+
+      @size.times { |i| temp_array[i] = @array[i] }
+
+      @array = temp_array
+    end
+
+    @array[@size] = value
+    @size += 1
+    self
+  end
 
   # Define a method ">>" which takes a single argument. This method should
   # prepend the argument to the beginning of this ArrayList and increase the
   # size by 1. The return value must be self.
+
+  def >> value
+    i = 1
+    @size += 1
+    temp_array = []
+
+    while i <= @size do
+      temp_array[i] = @array[i-1]
+      i += 1
+    end
+
+    temp_array[0] = value
+    @array = temp_array
+    self
+  end
 
   # Define a "delete" method which takes a single index argument. This method
   # should delete the value at the provided index and return it. The size should
